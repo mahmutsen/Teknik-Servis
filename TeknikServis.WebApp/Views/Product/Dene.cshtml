@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TeknikServis.Entities.Product>
+
+@{
+    ViewBag.Title = "PersonelIndex";
+}
+
+<h2>PersonelIndex</h2>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-8 col-md-offset-2">
+
+            <!--Bayilikler-->
+            <div class="row">
+
+                @foreach ( var item in Model)
+                {
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="http://placehold.it/320x150" alt="">
+                            <div class="caption">
+                                <h4>
+                                    <a href="#">@item.Imei</a>
+                                </h4>
+                                <p>
+                                    @if (string.IsNullOrEmpty(item.Problems) == false && item.Problems.Length > 40)
+                                    {
+                                        @(item.Problems.Substring(0, 38) + "...")
+                                    }
+                                    else
+                                    {
+                                        @item.Problems
+                                    }
+                                </p>
+                            </div>
+                            <h5>
+                                Garanti: @item.Warranty <br />
+                                <span class="glyphicon glyphicon-time"></span>@item.Reports.LastOrDefault().ModifiedOn<!--Buraya çalışma saatleri servicces lerden alınacak-->
+                            </h5>
+                            <div class="ratings">
+                                <p class="pull-right">Raporlar</p>
+                                <p>
+                                    @item.ModifiedUserName
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

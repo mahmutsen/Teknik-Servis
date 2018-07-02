@@ -1,0 +1,210 @@
+﻿@using TeknikServis.Entities
+@using TeknikServis.WebApp.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/shop-homepage.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</head>
+<body>
+    @{ var session = CurrentSession.Personel;}
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Menü</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @if (session != null)
+                {
+                    <a class="navbar-brand"><i class="glyphicon glyphicon-phone"></i> @session.Service.Title</a>
+                }
+                @if (session == null)
+                {
+                    <a class="navbar-brand" href="/Home/Index"><i class="glyphicon glyphicon-home"></i> MMS</a>
+                }
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    @if (session != null)
+                    {
+                        <li class="dropdown">
+                            <a href="/Report/MyReports" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-wrench">Yönetim</span><span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if (session.IsAdmin == false && session.IsManager == false)
+                                {
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Product/PersonelIndex", "th-list", " Cihazlar")
+                                    </li>
+                                }
+
+                                @if (session.IsAdmin == true && session.IsManager == false)
+                                {
+
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Product/AllProducts", "th-list", " Cihazlar")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Product/Index", "plus", " Cihaz Ekle")
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Customer/Create", "plus", " Müşteri Ekle")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Customer/Index", "th-list", " Müşteriler")
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Worker/Create", "plus", " Personel Ekle")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Worker/Index", "th-list", " Personeller")
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/BankAccount/Create", "plus", " Banka Hesabı Ekle")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/BankAccount/Index", "th-list", " Banka Hesapları")
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Fee/Index", "check", " Ücretler")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Cargo/Index", "check", " Kargolar")
+                                    </li>
+
+                                }
+                                @if (session.IsManager)
+                                {
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Category/Create", "plus", " Katagori Ekle")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Category/Index", "th-list", " Kategoriler")
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Pricing/Create", "plus", " Fiyatlandırma Ekle")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Pricing/Index", "th-list", " Fiyatlandırmalar")
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Service/Create", "plus", " Servis Ekle")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Service/Index", "th-list", " Servisler")
+                                    </li>
+
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Worker/Create", "plus", " Personel Ekle")
+                                    </li>
+                                    <li>
+                                        @MyBootstrap.LinkMenu("/Worker/Index", "th-list", " Personeller")
+                                    </li>
+
+
+                                }
+                            </ul>
+                        </li>
+
+                    }
+                    else
+                    {
+
+                        <li>
+                            <a href="/Home/Services">Servis Noktaları</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-check">Kayıt/Takip </span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Home/CustomerProductRegister">Servis Kayıt</a></li>
+                                <li><a href="/Home/CustomerQuery">Cihaz Takip</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-info-sign">Hakkımızda </span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Home/About">MMS Hakkında</a></li>
+                                <li><a href="#">Yedek Parça ve Onarım Ücretleri</a></li>
+                                <li><a href="/Home/Accounts">Hesap Bilgileri</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicon-earphone"></span>İletişim</a>
+                        </li>
+
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+
+
+                    @if (session == null)
+                    {
+                        <li>
+                            <a href="/Home/Login"><span class="glyphicon glyphicon-log-in"></span>Bayilik Girişi</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@CurrentSession.Personel.Username <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @MyBootstrap.LinkMenu("/Home/ShowProfile", "user", " Profili Göster")
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    @MyBootstrap.LinkMenu("/Home/EditProfile", "edit", " Profili Düzenle")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            @MyBootstrap.LinkMenu("/Home/Logout", "log-out", " Çıkış")
+                        </li>
+                    }
+
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    @RenderBody()
+
+    @RenderSection("footer", required: false) @*Sadece Belirtilen kısımlarda gelicek*@
+
+</body>
+</html>

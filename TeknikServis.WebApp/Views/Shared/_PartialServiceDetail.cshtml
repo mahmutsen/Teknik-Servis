@@ -1,0 +1,35 @@
+﻿@using TeknikServis.Entities
+@model Service
+
+<div class="row">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+</div>
+<div class="row">
+    <div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6020.5025333638805!2d29.02380603815685!3d41.01975844300695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7f5d417e97f%3A0x997a58e9bf30a821!2s%C3%87inili+Hamam!5e0!3m2!1str!2str!4v1527813014925" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+    <div class="col-md-5 pull-left">
+        <h3>@(Model.Title + " - " + Model.City)</h3>
+        <br />
+        <h5><b>@Html.DisplayNameFor(model => model.Category.Title) : </b>@Model.Category.Title</h5>
+        <h5><b>@Html.DisplayNameFor(model => model.Email) : </b>@Model.Email</h5>
+        <h5><b>@Html.DisplayNameFor(model => model.Tel) : </b>@Model.Tel</h5>
+        <h5><b>@Html.DisplayNameFor(model => model.Fax) : </b>@Model.Fax</h5>
+        <h5><b>@Html.DisplayNameFor(model => model.Adress) : </b>@Model.Adress</h5>
+
+        <h5><b>@Html.DisplayNameFor(model => model.BankAccounts)</b> :</h5>
+        @foreach (var item in Model.BankAccounts)
+        {
+            <h6>@item.Bank</h6>
+            <h6>@item.AccountName</h6>
+            <h6>@item.IBAN</h6>
+        }
+        <br />
+        <h3><span class="label label-info"><a href="~/Home/CustomerProductRegister/@Model.Id">Servis Kayıtı Oluştur</a></span></h3>
+    </div>
+    <div class="col-md-5">
+        <img src="~/images/@Model.Category.CategoryImage" alt=""width="300" height="200">
+        
+    </div>
+</div>

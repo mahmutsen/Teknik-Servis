@@ -1,0 +1,118 @@
+﻿<link href="~/Content/how-it-works.css" rel="stylesheet" />
+
+<!-- How it Works section -->
+<section class="section how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="row text-center">
+            <div class="how-it-works-heading">
+                <h2 class="section-title"><i>Süreç Nasıl İşler</i></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 board">
+                <!-- <h2>Welcome to IGHALO!<sup>™</sup></h2>-->
+                <div class="board-inner">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <div class="liner"></div>
+                        <li class="active">
+                            <a href="#home" aria-controls="home" role="tab" data-toggle="tab" title="User Experience">
+                                <span class="round-tabs one">
+                                    <i class="icon icon-profile-male"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" title="Sketch">
+                                <span class="round-tabs two">
+                                    <i class="icon icon-pencil"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#prototyping" aria-controls="prototyping" role="tab" data-toggle="tab" title="Prototyping">
+                                <span class="round-tabs three">
+                                    <i class="icon icon-layers"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#uidesign" aria-controls="uidesign" role="tab" data-toggle="tab" title="UI Design">
+                                <span class="round-tabs four">
+                                    <i class="icon icon-aperture"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#doner" aria-controls="doner" role="tab" data-toggle="tab" title="Development">
+                                <span class="round-tabs five">
+                                    <i class="icon icon-tools-2"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="home">
+                        <h3 class="head text-center"><strong>Servis Belirleme</strong></h3>
+                        <p class="narrow text-center">
+                            Cihazınızın üretici firmasına (örn; Samsung cihazınız için Samsung Servisleri) ve size yakınlığına göre bir servis noktası belirleyin.
+                        </p>
+                        <p class="text-center">
+                            <a href="/Home/Services"target="_blank" class="btn btn-success btn-outline-rounded green"> Servis Noktalarımız <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="profile">
+                        <h3 class="head text-center"><strong>Servis Kayıtı ve Kargo </strong></h3>
+                        <p class="text-center">
+                            Servis noktasını belirledikten sonra hasarlı cihazınızı mevcutsa kendi kutusu ile ya da hasar almayacak şekilde kutulayarak, belirlediğiniz servisimizin adresine kargolamanız gerekmektedir. Ups yada Aras kargo ile ücretsiz olarak gönderebilirsiniz.
+                        </p>
+                        <p class="text-center">
+                            Kayıt sonucu verilen form referans numaranızın son 6 Hanesini örn;(ref:53974) şeklinde kargo poşetinizin üzerine yazmanızı rica ederiz. Servis süresinin uzamaması için <b>Servis Noktası</b> seçiminizin ve belirttiğiniz adresin aynı olmasını rica ederiz.
+                        </p>
+                        <p class="text-center">
+                            <a href="/Home/CustomerProductRegister" target="_blank" class="btn btn-success btn-outline-rounded green"> Kayıt <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="prototyping">
+                        <h3 class="head text-center"><strong>Cihaz Takibi</strong></h3>
+                        <p class="narrow text-center">
+                            Servis kayıtı tamamlandıktan sonra dilerseniz cihazının takibini <b>cihaz Imei numarası</b> ile veya kayıt oluştururken kullandığınız <b>E-posta adresi</b> ile veya  kayıt sonrası size verilen <b>form no</b> ile sorgulayabilirsiniz
+                        </p>
+                        <p class="text-center">
+                            <a href="/Home/CustomerQuery"target="_blank" class="btn btn-success btn-outline-rounded green"> Takip <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="uidesign">
+                        <h3 class="head text-center"><strong>Servis Süreci</strong></h3>
+                        <p class="narrow text-center">
+                            Cihazınız servise ulaştığında, servis personellerimiz hasar tespiti yapar ve cihazın <b>garanti durumu</b> belirlenir. Garanti kapsamında bulunan cihazlar için onarım süreci başlar.
+                            Cihaz durumunu takip edebilir ve varsa güncel raporlarına ulaşabilirsiniz
+                        </p>
+                        <p class="narrow text-center">
+                            
+                        </p>
+                        @*<p class="text-center">
+                            <a href="" class="btn btn-success btn-outline-rounded green"> Get Quote <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                        </p>*@
+                    </div>
+                    <div class="tab-pane fade" id="doner">
+                        <div class="text-center">
+                            <i class="img-intro icon-checkmark-circle"></i>
+                        </div>
+                        <h3 class="head text-center">Ücretli Hizmet</h3>
+                        <p class="narrow text-center">
+                            Ücretli hizmet gerektiren durumlar da hizmetimizden yararlanmak istemediğiniz takdirde <b>Cihaz Takip </b>sayfamızdan <b>iptal</b> talebinde bulunarak veya <b>çağrı merkezi</b> kanalıyla iptal edebilirsiniz.
+                            7 iş günü Herhangi bir işlem yapılmaması durumunda servis kayıtınız sonlandırılır ve ürün adresinize geri gönderilir.
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /How it work -->
+
+@section footer{
+    @Html.Partial("_PartialFooter")
+}

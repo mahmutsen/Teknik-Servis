@@ -1,0 +1,153 @@
+﻿@using TeknikServis.Entities.ViewModelObjects
+@model RegisterViewModel
+
+
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/login-register.css" rel="stylesheet" />
+<link href="~/Content/validation-summary.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Servis Kayıt";
+}
+<link href="~/Content/login-register.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h1 class="title text-center">Cihaz Kayıt Formu</h1>
+                <div class="jumbotron">
+                    <h4 style="color:blue">Servisimize göndereceğiniz ürünleri;</h4>
+                    <ul class="small">
+                        <li>Ürünü orjinal kutusu ile, orjinal kutusu yoksa kargoda hasar görmeyecek şekilde ambalajlayarak</li>
+                        <li>Kayıt sonucu verilen form referans numaranızın son 6 Hanesini örn;(ref:53974) şeklinde kargo poşetinizin üzerine yazmanız gerekmektedir</li>
+                        <li>Cihazınızı Türkiye'nin her yerinden servis noktalarına ups yada aras kargo ile ücretsiz olarak gönderebilirsiniz</li>
+                        <li>Servis süresinin uzamaması için lütfen <b>Servis Noktası</b> seçiminiz ve kargo üzerinde belirteceğiniz adresin uyuşmasına dikkat edin</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row main">
+
+
+            <div class="col-md-6 main-login">
+                <h2 class="title"><span class="glyphicon glyphicon-user"></span> Gerekli Bilgileriniz</h2>
+                <div class="form-group off">
+                    <label for="email" class="cols-sm-2 control-label">Adınız</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Adınız" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Soyadınız</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", placeholder = "Soyadınız" })
+                        </div>
+                    </div>
+                </div>
+
+             
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Telefon Numaranız</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.TextBoxFor(x => x.Tel, new { @class = "form-control", placeholder = "0 (5**)- - -"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">E-Posta Adresiniz</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-posta" ,type="email"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Şehir</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.TextBoxFor(x => x.City, new { @class = "form-control", placeholder = "Şehir" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Adresiniz</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-home fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.TextAreaFor(x => x.Adress, new { @class = "form-control", rows = "3" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 main-login">
+                <h2 class="title"><span class="glyphicon glyphicon-phone"></span>Cihaz Bilgileri</h2>
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Ürün Imei Numarası</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-modal-window fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.TextBoxFor(x => x.Imei, new { @class = "form-control", placeholder = "Imei No" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Cihaz Sorunları</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-warning-sign fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.TextAreaFor(x => x.Problems, new { @class = "form-control", placeholder = "Lütfen Cihaz ile İlgili Yaşadığınız Problemleri Yazın.", rows = "4" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Lütfen Servis Noktasını Belirtiniz ( Size Yakın Olan Servis Noktaları için <a href="/Home/Services" target="_blank">Tıklayın</a>)</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-send fa-lg" aria-hidden="true"></i></span>
+
+                            @Html.DropDownListFor(x => x.ServiceId,null, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                @Html.ValidationSummary(false)
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Servis Kaydı Oluştur</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}

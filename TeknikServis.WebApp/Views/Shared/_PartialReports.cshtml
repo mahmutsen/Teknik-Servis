@@ -1,0 +1,61 @@
+﻿@using TeknikServis.Entities
+@using TeknikServis.WebApp.Models
+
+@model List<Report>
+
+@{
+    Worker worker = CurrentSession.Personel;
+}
+@foreach (Report item in Model)
+{
+    <div class="media">
+        <div class="media-left">
+            <a href="~/Worker/Details/@item.Id" target="_blank">
+                <img class="media-object" src="~/images/@item.Worker.PersonelImage" alt="..." width="64" height="64">
+            </a>
+        </div>
+        <div class="media-body">
+            <div>
+                <span class="col-md-10" id="report_text_@item.Id" contenteditable="false">
+                    @item.Text
+                </span>
+                @if (worker != null && worker.Id == item.Worker.Id)
+                {
+                    <span class="col-md-2 text-right">
+                        <button type="button" class="btn btn-warning btn-xs" data-edit-mode="false" onclick="doReport(this,'edit_clicked',@item.Id,'#report_text_@item.Id');">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs" onclick="doReport(this,'delete_clicked',@item.Id);">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </span>
+                }
+                <small class="col-md-12 text-right">
+                    <span class="glyphicon glyphicon-time"></span>@item.ModifiedOn&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-user"></span>@item.Worker.Username
+                </small>
+            </div>
+        </div>
+    </div>
+}
+
+@if (worker != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" id="new_report_text" class="form-control" placeholder="Raporunuz">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" onclick="doReport(this,'new_clicked',0);">
+                        <span class="glyphicon glyphicon-send">Gönder</span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+}

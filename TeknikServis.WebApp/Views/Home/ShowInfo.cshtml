@@ -1,0 +1,120 @@
+﻿@using TeknikServis.Entities
+@using TeknikServis.BusinessLayer
+@model Product
+@{
+    ViewBag.Title = "";
+}
+
+@{
+    ReportManager rep = new ReportManager();
+    var reports = rep.ListQueryable().Where(x => x.Worker.IsAdmin == true);
+}
+<div class="container">
+    <div class="row">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="img-circle" width="128" height="128" />
+        </div>
+        <div class="col-md-10">
+            <h3><b>@Html.DisplayNameFor(model => model.Imei) : </b>@(Model.Imei)</h3>
+            <h5><b>Ad Soyad:</b> @(Model.Owner.Name + " " + Model.Owner.Surname)</h5>
+            <h5><b>@Html.DisplayNameFor(model => model.Owner.Email) : </b>@Model.Owner.Email</h5>
+            <h5><b>@Html.DisplayNameFor(model => model.ServiceId) : </b>@Model.Service.Title / <b>Tel:</b>(@Model.Service.Tel)</h5>
+            <h5><b>@Html.DisplayNameFor(model => model.Problems) : </b>@Model.Problems</h5>
+            <hr />
+
+            @if (Model.Warranty == true)
+    {
+        <h3><span class="label label-success">Onarımda</span></h3>
+
+        <h3><span class="label label-default"> @Html.DisplayNameFor(model => model.Reports): </span></h3>
+foreach (var item in reports)
+{
+        <h4><span class="label label-info"><b> Rapor: </b>@item.Text</span></h4><span class="glyphicon glyphicon-time">@item.CreatedOn</span>
+}
+}
+
+            @if (Model.AtService == false)
+    {
+        if (Model.Cargo == null)
+        {
+            <h3><span class="label label-default">Cihaz serviste değil / henüz ulaşmadı</span></h3>
+}
+else if (Model.Cargo != null)
+{
+        <div>
+            <h3><span class="label label-info">Cihaz kayıtlı adresinize ulaştırılmak üzere kargoya verildi. Kargo bilgileriniz;</span></h3><br />
+        </div>
+        <div>
+            <h4><span class="label label-info"><b> @Html.DisplayNameFor(model => model.Cargo.Firm):</b></span><b> @Model.Cargo.Firm </b>Kargo</h4><br />
+            <h4><span class="label label-info"><b> @Html.DisplayNameFor(model => model.Cargo.TrackerNo):</b></span><b> @Model.Cargo.TrackerNo </b></h4><br />
+        </div>
+}
+}
+
+            @if (Model.Warranty == false && Model.Fee != null)
+    {
+        if (Model.Fee.IsPaid == false && Model.Fee.IsDenied != true)
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <h3><span class="label label-warning">Cihaz garanti kapsamında değil</span></h3>
+                </div>
+                <div class="col-md-6">
+                    <h3><span class="label label-warning"><b> @Html.DisplayNameFor(model => model.Fee):</b></span> <b> @Model.Fee.Value </b>TL</h3><br />
+                </div>
+            </div>
+
+            <a href="/Home/SuspendCustomer" class="btn btn-danger btn-lg pull-right" onclick="return confirm('Ücretli hizmeti iptal etmek üzeresiniz.Emin misiniz?')">iptal Talep</a>
+            <h5><span class="label label-default"> @Html.DisplayNameFor(model => model.Reports): </span></h5>
+
+    foreach (var item in reports)
+    {
+        <h3><span class="label label-info"><b> Rapor: </b>@item.Text</span></h3><span class="glyphicon glyphicon-time">@item.CreatedOn</span>
+}
+
+        <div class="alert alert-info" role="alert">
+            Cihaz onarımını onaylıyorsanız lütfen ilgili servisin <a href="/Home/Accounts" class="alert-link" target="_blank">hesabına  </a> belirtilen tutarı havale/eft yapınız.
+        </div><br />
+        <div class="alert alert-warning" role="alert">
+            Eğer ücretli hizmetimizden yararlanmak istemiyorsanız lütfen <b>iptal</b>
+            butonuna tıklayarak durumunuzu güncelleyin. Herhangi bir işlem yapılmaması durumunda 7 iş günü içerisinde durumunuz inaktif olarak değiştirilip,
+            cihaz geri gönderilecektir. Daha fazla bilgi için direkt olarak yukarı da ki numaradan ilgili servise ya da iletişim kısmından genel çağrı merkezine ulaşabilirsiniz.
+        </div><br />
+
+
+}
+else if (Model.Fee.IsDenied)
+{
+        <h3><span class="label label-danger">Cihaz onarım iptal talebiniz dikkate alındı</span></h3><br /> <br />
+        <div class="alert alert-warning" role="alert">
+            Bu işlemi siz gerçekleştirmediyseniz veya fikrinizi değiştirmeniz durumunda yukarıda ki servis numarası veya genel çağrı merkezi aracılığıyla bize ulaşabilirsiniz.
+        </div>
+        <h3><span class="label label-default"> @Html.DisplayNameFor(model => model.Reports): </span></h3>
+foreach (var item in reports)
+{
+        <h4><span class="label label-info"><b> Rapor: </b>@item.Text</span></h4><span class="glyphicon glyphicon-time">@item.CreatedOn</span>
+}
+}
+
+else if (Model.Fee.IsPaid)
+{
+        <h3><span class="label label-success">Onarımda</span></h3>
+
+        <h3><span class="label label-default"> @Html.DisplayNameFor(model => model.Reports): </span></h3>
+foreach (var item in reports)
+{
+        <h4><span class="label label-info"><b> Rapor: </b>@item.Text</span></h4><span class="glyphicon glyphicon-time">@item.CreatedOn</span>
+}
+}
+}
+
+
+            <br /><br />
+            <a href="/Home/CustomerLogout" class="btn btn-warning center-block"><span class="glyphicon glyphicon-log-out"></span>Sorgulama oturumunu sonlandır.</a>
+        </div>
+    </div>
+</div>

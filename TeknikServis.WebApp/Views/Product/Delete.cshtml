@@ -1,0 +1,73 @@
+﻿@model TeknikServis.Entities.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Sil</h2>
+        <h3>Silmek istediğinize emin misiniz?</h3>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-2">
+        <h4>Cihaz</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Owner.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Owner.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Service.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Imei)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Imei)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Problems)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Problems)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Warranty)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Warranty)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+            <div class="form-actions no-color">
+                @MyBootstrap.Button("submit", "danger", string.Empty, "remove", " Sil")
+                @*@MyBootstrap.LinkButton("/Product/AllProducts", "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")*@
+                @MyBootstrap.LinkButton(" " + @ViewBag.returnUrl, "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")
+            </div>
+        }
+    </div>
+</div>

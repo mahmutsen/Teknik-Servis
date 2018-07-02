@@ -1,0 +1,74 @@
+﻿@model TeknikServis.Entities.Fee
+@{
+    ViewBag.Title = "LimitedEdit";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Düzenle</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Ücret</h4>
+                <hr />
+                @Html.ValidationSummary(false)
+                @Html.HiddenFor(model => model.ProductId)
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.ProductId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ProductId, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Statement, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Statement, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsPaid, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-1">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsPaid, new {htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsDenied, htmlAttributes: new {@class = "control-label col-md-2" })
+                    <div class="col-md-1">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsDenied, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @MyBootstrap.Button("submit", "success", string.Empty, "floppy-saved", " Kaydet")
+                        @MyBootstrap.LinkButton("/Fee/Index", "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")
+                    </div>
+                </div>
+            </div>
+        }
+</div>
+</div>

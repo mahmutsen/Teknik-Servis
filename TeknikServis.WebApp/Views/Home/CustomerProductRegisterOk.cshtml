@@ -1,0 +1,33 @@
+﻿@using TeknikServis.Entities
+@model Customer
+
+@{
+    ViewBag.Title = "Form No Bilgilendirme";
+}
+
+
+<div class="row">
+
+    <div class="panel panel-primary text-center col-lg-4 col-md-4 col-lg-offset-4 col-md-offset-4">
+        <div class="panel-heading">
+            <h3 class="panel-title">Yönlendirilmek Üzeresiniz...</h3>
+        </div>
+        <div class="panel-body">
+            <hr />
+            <h4>Cihaz Tarafımıza Ulaştıktan Sonra, Cihaz Kaydınız <strong>Aktif </strong>Duruma Getirelecektir</h4>
+            <p>Cihazınızın takibi için bu kodu kullanabilirsiniz<strong> @Model.FormNo </strong></p>
+        </div>
+    </div>
+</div>
+
+
+@*<script>
+    $(function () {
+        $("footer").parent().hide();
+    });
+
+    setTimeout(function () {
+        window.location = "/Home/Index";
+    }, 5000)
+</script>*@
+

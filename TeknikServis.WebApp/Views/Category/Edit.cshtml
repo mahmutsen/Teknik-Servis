@@ -1,0 +1,72 @@
+﻿@*@using TeknikServis.WebApp Hata oluşursa kontrol (Mybootstrap html metodları için)!!*@
+@model TeknikServis.Entities.Category
+
+<link href="~/Content/validation-summary.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Düzenle</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+        @using (Html.BeginForm("Edit","Category", FormMethod.Post,new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Kategori</h4>
+                <hr />
+                @Html.ValidationSummary(false)
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <img src="~/images/@Model.CategoryImage" class="img-circle" width="128" height="128" />
+                        @Html.HiddenFor(model => model.CategoryImage) <!-- Validation gibi durumlarda sayfa geri döndüğünde profil resminin model üzerinden gözükebilmesi için(Postdan sonra geri yüklendiğinde)-->
+                    </div>
+                    <div class="col-md-10">
+                        <input type="file" name="CategoryImage" id="CategoryImage" class="form-control" /><br />
+                        <span class="glyphicon glyphicon-info-sign">&nbsp;</span>
+                        <span><i>Lütfen jpg, jpeg ya da png formatı kullanın.</i></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @MyBootstrap.Button("submit", "success", string.Empty, "floppy-saved", " Kaydet")
+                        @MyBootstrap.LinkButton("/Category/Index", "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

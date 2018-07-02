@@ -1,0 +1,127 @@
+﻿@using TeknikServis.WebApp.Models
+@model TeknikServis.Entities.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+<input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Detay</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h4>Cihaz</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Service.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Imei)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Imei)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Owner.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Owner.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Problems)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Problems)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AtService)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AtService)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Warranty)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Warranty)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsRepaired)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsRepaired)
+            </dd>
+
+            <dt>
+                @Html.DisplayFor(model => model.Personel.Username)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Personel.Email)
+            </dd>
+
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.Owner.Fee)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Owner.Fee)
+                </dd>*@
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedUserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedUserName)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-8 col-lg-offset-2">
+        @if (CurrentSession.Personel.IsAdmin)
+        {
+            <p>
+                @*@MyBootstrap.LinkButton("/Product/Edit/" + Model.Id, "warning", string.Empty, "Düzenle", "edit", " Düzenle")*@
+                @MyBootstrap.LinkButton(" " + @ViewBag.returnUrl, "default", string.Empty, "Liste", "arrow-left", " Geri Dön")
+            </p>
+        }
+        @if (!CurrentSession.Personel.IsAdmin)
+        {
+            <p>
+                @*@MyBootstrap.LinkButton("/Product/PersonelEdit/" + Model.Id, "warning", string.Empty, "Düzenle", "edit", " Düzenle")*@
+                @MyBootstrap.LinkButton(" " + @ViewBag.returnUrl, "default", string.Empty, "Liste", "arrow-left", " Geri Dön")
+            </p>
+        }
+    </div>
+</div>

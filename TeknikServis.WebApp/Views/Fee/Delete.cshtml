@@ -1,0 +1,82 @@
+﻿@model TeknikServis.Entities.Fee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Sil</h2>
+        <h3>Silmek istediğinize emin misiniz?</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-2">
+        <h4>Ücret</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Imei)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Product.Imei)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Value)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Value)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsPaid)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsPaid)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDenied)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsDenied)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Statement)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Statement)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @*<input type="submit" value="Delete" class="btn btn-default" /> |*@
+            @MyBootstrap.Button("submit", "danger", string.Empty, "remove", " Sil")
+            @MyBootstrap.LinkButton(" " + @ViewBag.returnUrl, "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")
+            @*@MyBootstrap.LinkButton("/Product/AllProducts", "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")*@
+            @*@Html.ActionLink("Back to List", "Index")*@
+        </div>
+        }
+    </div>
+</div>

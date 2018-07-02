@@ -1,0 +1,80 @@
+﻿@using TeknikServis.WebApp.Models
+@using TeknikServis.BusinessLayer
+@using TeknikServis.Entities
+
+@{
+    StockManager sm = new StockManager();
+    List<Stock> list = sm.List(x => x.ServiceId == CurrentSession.Personel.ServiceId);
+}
+<style type="text/css">
+    .s-quantity{
+        min-width: 50px;
+        width: 50px;
+        background-color: lightgreen;
+    }
+
+</style>
+
+<div class="list-group col-md-12">
+    <a href="@Url.Action("Index","Stock")"target="_blank" class="list-group-item active">Stok</a>
+
+    @foreach (var stock in list)
+    {
+        @*<div class="container col-md-4 col-md-offset-4" data-stock-id="@stock.Id">
+                <div class="count-input space-bottom">
+                    <a class="incr-btn" data-action="decrease" data-stock-id="@stock.Id" href="#">–</a>
+                    <input class="quantity" type="text" name="quantity" value="1" />
+                    <span class="s-quantity">@stock.Quantity</span>
+                    <a class="incr-btn" data-action="increase" data-stock-id="@stock.Id" href="">&plus;</a>
+                </div>
+            </div>*@
+        <div class="form-group" data-stock-id="@stock.Id">
+            <label class="control-label col-md-5"><strong>@stock.Name</strong></label>
+            <div class="input-group number-spinner col-md-3">
+                <span class="input-group-btn">
+                    <button class="btn btn-danger" data-stock-id="@stock.Id" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                </span>
+                <span class="s-quantity form-control">@stock.Quantity</span>
+                <span class="input-group-btn">
+                    <button class="btn btn-info" data-stock-id="@stock.Id" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                </span>
+            </div>
+        </div>
+    }
+
+
+</div>
+@*<script src="~/Scripts/jquery-3.3.1.js"></script>*@
+
+<script>
+
+    $(function () {
+
+        $("button[data-dir]").click(function () {
+            var btn = $(this);
+            var dir = btn.data("dir");
+            var stockid = btn.data("stock-id");
+            var spanCount = btn.parent().siblings(".s-quantity");
+            console.log("adet" + spanCount.text());
+
+            $.ajax({
+                method: "POST",
+                url: "/Stock/Update",
+                data: { "stockid": stockid, "dir": dir }
+            }).done(function (data) {
+                console.log(data);
+                if (data.hasError) {
+                    alert(data.errorMessage);
+                } else {
+                    spanCount.text(data.result);
+                    console.log("adet : " + spanCount.text());
+                }
+
+            }).fail(function () {
+                alert("Sunucu ile bağlantı Kurulamadı.");
+            })
+
+
+        });
+    });
+</script>

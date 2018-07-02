@@ -1,0 +1,88 @@
+﻿@model TeknikServis.Entities.Fee
+
+@{
+    ViewBag.Title = "Detay";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Detay</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h4>Ücret</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ProductId)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Imei)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Product.Imei)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Value)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Value)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsPaid)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsPaid)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDenied)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsDenied)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Statement)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Statement)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedUserName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedUserName)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-md-8 col-lg-offset-2">
+        <p>
+            @MyBootstrap.LinkButton("/Fee/Edit/" + Model.ProductId, "warning", string.Empty, "Düzenle", "edit", " Düzenle")
+            @*@MyBootstrap.LinkButton("/Product/", "default", string.Empty, "Liste", "arrow-left", " Geri Dön")*@
+        </p>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+﻿@model IEnumerable<TeknikServis.Entities.Product>
+
+<link href="~/Content/filtertb.css" rel="stylesheet" />
+<script src="~/Scripts/table-filter.js"></script>
+@{
+    ViewBag.Title = "Inactive";
+}
+
+
+
+<div class="container">
+
+    <div class="row">
+        <!--Kategoriler-->
+        <div class="col-md-2">
+            @Html.Partial("_PartialProducts")
+        </div>
+
+        <div class="col-md-10">
+
+
+            <div class="container">
+                <div class="row">
+                    <section class="content">
+                        @*<h1>Cihazlar</h1>*@
+                        <div class="col-md-8">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="pull-left">
+                                        @using (Html.BeginForm())
+                                        {
+                                            <div class="btn-group">
+                                                <b>Imei:</b> @Html.TextBox("SearchString")
+                                                <input type="submit" class="bg-primary" value="Filtrele" />
+                                            </div>
+
+                                        }
+                                    </div>
+                                    <div class="pull-right">
+                                        <div class="btn-group">
+                                            @*<button type="button" class="btn btn-success btn-filter" data-target="all">Tumu</button>*@
+                                            @*<button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Beklemede</button>
+                                                <button type="button" class="btn btn-default btn-filter" data-target="yolda">Yolda</button>
+                                                <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">İptal</button>*@
+                                        </div>
+                                    </div>
+                                    <div class="table-container">
+                                        <table class="table table-filter">
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr data-status="cancelado">
+                                                        <td>
+                                                            <div class="ckbox">
+                                                                @MyBootstrap.LinkButton("/Product/Edit/" + @item.Id, "primary", "xs", "Düzenle", "edit", string.Empty)
+                                                            </div><br />
+
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:;" class="star">
+                                                                <i class="glyphicon glyphicon-star"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="media">
+                                                                <a href="/Product/Details/@item.Id" class="pull-left">
+                                                                    <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="media-photo">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right"> @item.ModifiedOn-@item.ModifiedUserName</span>
+                                                                    <h4 class="title">
+                                                                        @item.Imei
+                                                                        <span class="pull-right cancelado">(iptal)</span><br />
+                                                                        <span class="pull-right cancelado">
+                                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_report"
+                                                                                    data-product-id="@item.Id">
+                                                                                Raporlar
+                                                                            </button>
+                                                                        </span>
+                                                                    </h4>
+                                                                    @*<p class="summary">Ut enim ad minim veniam, quis nostrud exercitation...</p>*@
+                                                                </div>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-footer">
+                                <p>
+                                    Page © - 2016 <br>
+                                    Powered By <a href="https://www.facebook.com/tavo.qiqe.lucero" target="_blank">TavoQiqe</a>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@MyBootstrap.ModalPopup(id: "modal_report", title: "Raporlar")
+
+<script src="~/Scripts/report.js"></script>

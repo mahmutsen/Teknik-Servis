@@ -1,0 +1,18 @@
+﻿@using TeknikServis.BusinessLayer
+@using TeknikServis.Entities
+
+@{ 
+    CategoryManager cm = new CategoryManager();
+    List<Category> list= cm.List();
+}
+
+<div class="list-group">
+    <a href="@Url.Action("Services","Home")" class="list-group-item active">Teknik Servisler</a>
+
+    @foreach (var cat in list)
+    {
+        <a href="/Home/ByCategory/@cat.Id" title="@cat.Description" class="list-group-item">@cat.Title</a>
+    }
+
+
+</div>

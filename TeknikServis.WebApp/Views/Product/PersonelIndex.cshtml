@@ -1,0 +1,188 @@
+﻿@model IEnumerable<TeknikServis.Entities.Product>
+
+<link href="~/Content/filtertb.css" rel="stylesheet" />
+<script src="~/Scripts/table-filter.js"></script>
+
+@{
+    ViewBag.Title = "Cihazlar";
+}
+
+@*<h2>Cihazlar</h2>*@
+
+@{
+    var isRepaired = Model.Where(x => x.IsRepaired == true).OrderByDescending(x => x.ModifiedOn);
+    var notRepaired = Model.Where(x => x.IsRepaired == false).OrderByDescending(x => x.ModifiedOn);
+
+}
+
+<div class="container">
+    <div class="row">
+        <section class="content">
+            <h1>Cihazlar</h1>
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="pull-left">
+                            @using (Html.BeginForm())
+                            {
+                                <div class="btn-group">
+                                    <b>Imei:</b> @Html.TextBox("SearchString")
+                                    <input type="submit" class="bg-primary" value="Ara" />
+                                </div>
+
+                            }
+                        </div>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#stockModel">Stok Güncelle<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-copy"></span></button>
+                                <button type="button" class="btn btn-success btn-filter" data-target="pagado">Tamamlanmış</button>
+                                <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Devam Eden</button>
+                                <button type="button" class="btn btn-default btn-filter" data-target="all">Tüm</button>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table class="table table-filter">
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Service.Title)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Imei)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Owner.Tel)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Owner.Email)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Problems)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsRepaired)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CreatedOn)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ModifiedOn)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.ModifiedUserName)
+                                        </th>
+                                    </tr>
+                                    @foreach (var item in isRepaired)
+                                    {
+                                        <tr data-status="pagado">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Service.Title)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Imei)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Owner.Tel)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Owner.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Problems)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IsRepaired)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CreatedOn)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ModifiedOn)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ModifiedUserName)
+                                            </td>
+                                            <td>
+                                                @MyBootstrap.LinkButton("/Product/PersonelEdit/" + @item.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                @MyBootstrap.LinkButton("/Product/Details/" + @item.Id, "info", "xs", "Detay", "search", string.Empty)
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    @foreach (var item in notRepaired)
+                                    {
+                                        <tr data-status="pendiente">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Service.Title)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Imei)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Owner.Tel)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Owner.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Problems)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IsRepaired)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CreatedOn)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ModifiedOn)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ModifiedUserName)
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success glyphicon glyphicon-comment" data-toggle="modal" data-target="#modal_report"
+                                                        data-product-id="@item.Id"></button>
+                                                @MyBootstrap.LinkButton("/Product/PersonelEdit/" + @item.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                @MyBootstrap.LinkButton("/Product/Details/" + @item.Id, "info", "xs", "Detay", "search", string.Empty)
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-footer">
+                    <p>
+                        Page © - 2016 <br>
+                        Powered By <a href="https://www.facebook.com/tavo.qiqe.lucero" target="_blank">TavoQiqe</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+@MyBootstrap.ModalPopup(id: "modal_report", title: "Raporlar")
+
+<!-- Modal -->
+<div class="modal fade" id="stockModel" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Stoklar</h4>
+            </div>
+            <div class="modal-body">
+                <p>@Html.Partial("_PartialStocks")</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/report.js"></script>

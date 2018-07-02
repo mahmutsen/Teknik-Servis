@@ -1,0 +1,5 @@
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Core\bin\Debug\TeknikServis.Core.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Core\bin\Debug\TeknikServis.Core.pdb
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Core\obj\Debug\TeknikServis.Core.csproj.CoreCompileInputs.cache
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Core\obj\Debug\TeknikServis.Core.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Core\obj\Debug\TeknikServis.Core.pdb

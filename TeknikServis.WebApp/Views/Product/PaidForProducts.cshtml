@@ -1,0 +1,286 @@
+﻿@model IEnumerable<TeknikServis.Entities.ViewModelObjects.ProductFee>
+
+<link href="~/Content/filtertb.css" rel="stylesheet" />
+<script src="~/Scripts/table-filter.js"></script>
+@{
+    ViewBag.Title = "Deneme";
+}
+
+
+
+<div class="container">
+
+    <div class="row">
+        <!--Kategoriler-->
+        <div class="col-md-2">
+            @Html.Partial("_PartialProducts")
+        </div>
+
+        <div class="col-md-10">
+            @{
+                var atandi = Model.Where(x => x.Fee.IsPaid == true && x.Product.WorkerId != null).OrderByDescending(x => x.Product.ModifiedOn);
+                var atanmadi = Model.Where(x => x.Fee.IsPaid == true && x.Product.WorkerId == null).OrderByDescending(x => x.Product.ModifiedOn);
+                var beklemede = Model.Where(x => x.Fee.IsPaid == false).OrderByDescending(x => x.Fee.ModifiedOn);
+                var iptal = Model.Where(x => x.Fee.IsDenied == true).OrderByDescending(x => x.Fee.ModifiedOn);
+            }
+
+            <div class="container">
+                <div class="row">
+                    <section class="content">
+                        @*<h1>Cihazlar</h1>*@
+                        <div class="col-md-8">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="pull-left">
+                                        @using (Html.BeginForm())
+                                        {
+                                            <div class="btn-group">
+                                                <b>Imei:</b> @Html.TextBox("SearchString")
+                                                <input type="submit" class="bg-primary" value="Filtrele" />
+                                            </div>
+
+                                        }
+                                    </div>
+                                    <div class="pull-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success btn-filter" data-target="pagado">Personelde</button>
+                                            <button type="button" class="btn btn-info btn-filter" data-target="bosta">Boşta</button>
+                                            <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Onay Bekleniyor</button>
+                                            <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">İptal</button>
+                                            <button type="button" class="btn btn-default btn-filter" data-target="all">Tümü</button>
+                                        </div>
+                                    </div>
+                                    <div class="table-container">
+                                        <table class="table table-filter">
+                                            <tbody>
+                                                @foreach (var item in atandi)
+                                                {
+                                                    <tr data-status="pagado">
+                                                        <td>
+                                                            <div class="ckbox">
+                                                                @MyBootstrap.LinkButton("/Product/Edit/" + @item.Product.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                                @*@Html.ActionLink("Edit", "Product", new { id = item.Product.Id }, new { onclick = "return AreYouSureFunction(this);" })*@
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:;" class="star">
+                                                                <i class="glyphicon glyphicon-star"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="media">
+                                                                <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                    <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="media-photo">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right"></span>
+                                                                    <h4 class="title">
+                                                                        <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                            @item.Product.Imei
+                                                                        </a>
+                                                                        <span class="pull-right pagado">(Personelde)</span><br />
+                                                                        <span class="pull-right pagado">@item.Product.ModifiedOn-@item.Product.ModifiedUserName</span><br />
+                                                                        <span class="pull-right pagado">
+                                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_report"
+                                                                                    data-product-id="@item.Product.Id">
+                                                                                Raporlar
+                                                                            </button>
+                                                                        </span>
+
+                                                                    </h4>
+                                                                    <p class="summary">@item.Product.Problems</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                                @foreach (var item in atanmadi)
+                                                {
+                                                    <tr data-status="bosta">
+                                                        <td>
+                                                            <div class="ckbox">
+                                                                @MyBootstrap.LinkButton("/Product/Edit/" + @item.Product.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:;" class="star">
+                                                                <i class="glyphicon glyphicon-star"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="media">
+                                                                <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                    <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="media-photo">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right"></span>
+                                                                    <h4 class="title">
+                                                                        <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                            @item.Product.Imei
+                                                                        </a>
+                                                                        <span class="pull-right default">(Boşta)</span><br />
+                                                                        <span class="pull-right default">@item.Product.ModifiedOn-@item.Product.ModifiedUserName</span><br />
+                                                                        <span class="pull-right default">
+                                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_report"
+                                                                                    data-product-id="@item.Product.Id">
+                                                                                Raporlar
+                                                                            </button>
+                                                                        </span>
+
+                                                                    </h4>
+                                                                    <p class="summary">@item.Product.Problems</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @foreach (var item in beklemede)
+                                                {
+                                                    <tr data-status="pendiente">
+                                                        <td>
+                                                            <div class="ckbox">
+                                                                @MyBootstrap.LinkButton("/Product/Edit/" + @item.Product.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:;" class="star">
+                                                                <i class="glyphicon glyphicon-star"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="media">
+                                                                <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                    <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="media-photo">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right"></span>
+                                                                    <h4 class="title">
+                                                                        <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                            @item.Product.Imei
+                                                                        </a>
+                                                                        <span class="pull-right pendiente">(Beklemede)</span><br />
+                                                                        <span class="pull-right pendiente">@item.Product.ModifiedOn-@item.Product.ModifiedUserName</span><br />
+                                                                        <span class="pull-right pendiente">
+                                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_report"
+                                                                                    data-product-id="@item.Product.Id">
+                                                                                Raporlar
+                                                                            </button>
+                                                                        </span>
+
+                                                                    </h4>
+                                                                    <p class="summary">@item.Product.Problems</p>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="ckbox">
+                                                                @if (item.Fee != null)
+                                                                {
+                                                                    @MyBootstrap.LinkButton("/Fee/Edit/" + @item.Fee.ProductId, "warning", "xs", "Düzenle", "edit", " " + item.Fee.Value + " TL")
+                                                                }
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                                @foreach (var item in iptal)
+                                                {
+                                                    <tr data-status="cancelado">
+                                                        <td>
+                                                            <div class="ckbox">
+                                                                @MyBootstrap.LinkButton("/Product/Edit/" + @item.Product.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:;" class="star">
+                                                                <i class="glyphicon glyphicon-star"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="media">
+                                                                <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                    <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="media-photo">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right"></span>
+                                                                    <h4 class="title">
+                                                                        <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                            @item.Product.Imei
+                                                                        </a>
+                                                                        <span class="pull-right cancelado">(İptal)</span><br />
+                                                                        <span class="pull-right cancelado">@item.Product.ModifiedOn-@item.Product.ModifiedUserName</span><br />
+                                                                        <span class="pull-right cancelado">
+                                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_report"
+                                                                                    data-product-id="@item.Product.Id">
+                                                                                Raporlar
+                                                                            </button>
+                                                                        </span>
+
+                                                                    </h4>
+                                                                    <p class="summary">@item.Product.Problems</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @*@foreach (var item in Model)
+                                                    {
+                                                        <tr data-status="tumu">
+                                                            <td>
+                                                                <div class="ckbox">
+                                                                    @MyBootstrap.LinkButton("/Product/PersonelEdit/" + @item.Product.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:;" class="star">
+                                                                    <i class="glyphicon glyphicon-star"></i>
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <div class="media">
+                                                                    <a href="/Product/Details/@item.Product.Id" class="pull-left">
+                                                                        <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="media-photo">
+                                                                    </a>
+                                                                    <div class="media-body">
+                                                                        <span class="media-meta pull-right">@item.Product.CreatedOn-@item.Product.ModifiedUserName</span>
+                                                                        <h4 class="title">
+                                                                            @item.Product.Imei
+                                                                            <span class="pull-right text-info"></span>
+                                                                        </h4>
+                                                                        <p class="summary">@item.Product.Problems</p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    }*@
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-footer">
+                                <p>
+                                    Page © - 2016 <br>
+                                    Powered By <a href="https://www.facebook.com/tavo.qiqe.lucero" target="_blank">TavoQiqe</a>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@MyBootstrap.ModalPopup(id: "modal_report", title: "Raporlar")
+
+<script src="~/Scripts/report.js"></script>

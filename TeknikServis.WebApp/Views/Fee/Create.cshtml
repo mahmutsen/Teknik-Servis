@@ -1,0 +1,84 @@
+﻿@model TeknikServis.Entities.Fee
+
+<link href="~/Content/validation-summary.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Ekle";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Ekle</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { onsubmit = "return confirm('Onayladığınız takdirde cihaz sahibine bildirim gönderilecektir.Oluşturmak istediğinize emin misiniz?');" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="form-horizontal">
+                <h4>Ücret</h4>
+                <hr />
+                @Html.ValidationSummary(false)
+                @Html.HiddenFor(model => model.ProductId)
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.ProductId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.ProductId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.TextBox("ProductId", ViewData["id"])
+                            @Html.HiddenFor(model => model.ProductId, new { @Value=@ViewData["id"] })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsPaid, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsPaid)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsDenied, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsDenied)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Statement, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Statement, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @MyBootstrap.Button("submit", "success", string.Empty, "plus", " Ekle")
+                        @*@Html.ActionLink("Geri", "Index")*@
+                        @MyBootstrap.LinkButton("/Product/AllProducts", "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+
+        </div>
+    </div>
+</div>

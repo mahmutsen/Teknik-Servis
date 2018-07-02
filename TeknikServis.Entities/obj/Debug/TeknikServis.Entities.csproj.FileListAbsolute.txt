@@ -1,0 +1,11 @@
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\bin\Debug\TeknikServis.Entities.dll.config
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\bin\Debug\TeknikServis.Entities.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\bin\Debug\TeknikServis.Entities.pdb
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\bin\Debug\EntityFramework.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\bin\Debug\System.Web.Mvc.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\bin\Debug\EntityFramework.xml
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\obj\Debug\TeknikServis.Entities.csproj.CoreCompileInputs.cache
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\obj\Debug\TeknikServis.Entities.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Entities\obj\Debug\TeknikServis.Entities.pdb

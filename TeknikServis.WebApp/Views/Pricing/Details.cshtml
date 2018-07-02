@@ -1,0 +1,72 @@
+﻿@model TeknikServis.Entities.Pricing
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Detay</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h4>Fiyatlandırma</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DefectType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DefectType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedUserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedUserName)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-8 col-lg-offset-2">
+        <p>
+            @MyBootstrap.LinkButton("/Pricing/Edit/" + Model.Id, "warning", string.Empty, "Düzenle", "edit", " Düzenle")
+            @MyBootstrap.LinkButton("/Pricing/Index", "default", string.Empty, "Liste", "arrow-left", " Geri Dön")
+        </p>
+    </div>
+</div>

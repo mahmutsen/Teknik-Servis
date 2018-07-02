@@ -1,0 +1,116 @@
+﻿@using TeknikServis.Entities
+@model List<Service>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <!--Kategoriler-->
+        <div class="col-md-3">
+            @Html.Partial("_PartialCategories")
+        </div>
+
+        <div class="col-md-9">
+
+            <!--Corousel-->
+            <div class="row carousel-holder">
+                <div class="col-md-12">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="slide-image" src="" height="800" width="300" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="" alt="">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!--Bayilikler-->
+            <div class="row">
+
+                @foreach (Service ser in Model)
+                {
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="~/images/@ser.Category.CategoryImage" alt="">
+                            <div class="caption">
+                                <a href="#" data-toggle="modal" data-target="#modal_servicedetail" data-service-id="@ser.Id">
+                                    @ser.Title
+                                </a>
+                                <p>
+                                    @if (string.IsNullOrEmpty(ser.Text) == false && ser.Text.Length > 40)
+                                    {
+                                        @(ser.Text.Substring(0, 38) + "...")
+                                    }
+                                    else
+                                    {
+                                        @ser.Text
+                                    }
+                                </p>
+                            </div>
+                            <h5>
+                                @ser.Adress <br />
+                                @*<span class="glyphicon glyphicon-time"></span>11.40-22-00*@ <!--Buraya çalışma saatleri servicces lerden alınacak-->
+                            </h5>
+                            <div class="ratings">
+                                <p class="pull-right">@ser.City</p>
+                                <p>
+                                    <i class="glyphicon glyphicon-phone"></i>@ser.Tel
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@MyBootstrap.ModalPopup(id: "modal_servicedetail", title: "Servis Detayı")
+
+@section footer{z
+    @Html.Partial("_PartialFooter")
+}
+
+@*Footer section ı partial footer ile doldurduk*@
+<script>
+    $(function () {
+
+        $('#modal_servicedetail').on('show.bs.modal', function (e) {
+
+            var btn = $(e.relatedTarget);
+            serviceid = btn.data("service-id");
+
+            $("#modal_servicedetail_Body").load("/Home/GetServiceDetail/" + serviceid);
+        })
+
+    });
+</script>

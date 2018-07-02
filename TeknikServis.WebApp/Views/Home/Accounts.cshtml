@@ -1,0 +1,40 @@
+﻿@using TeknikServis.Entities
+@model List<BankAccount>
+
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+@*<script src="~/Scripts/bootstrap.min.js"></script>*@
+<link href="~/Content/accounts-table.css" rel="stylesheet" />
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+
+@{
+    ViewBag.Title = "Accounts";
+}
+
+<h2>Accounts</h2>
+
+<div class="wrapper">
+    <table id="acrylic">
+        <thead>
+            <tr>
+                <th>Servis</th>
+                <th>Banka Adı</th>
+                <th>Hesap Adı</th>
+                <th>Hesap Numarası</th>
+                <th>IBAN</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Service.Title</td>
+                    <td>@item.Bank</td>
+                    <td>@item.AccountName</td>
+                    <td>@item.AccountNo</td>
+                    <td>@item.IBAN</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

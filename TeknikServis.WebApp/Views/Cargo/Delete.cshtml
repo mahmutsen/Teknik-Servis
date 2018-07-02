@@ -1,0 +1,66 @@
+﻿@model TeknikServis.Entities.Cargo
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Sil</h2>
+        <h3>Silmek istediğinize emin misiniz?</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-2">
+        <h4>Cargo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.Imei)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Product.Imei)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Firm)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Firm)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TrackerNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TrackerNo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsArrived)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsArrived)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+            @*<input type="submit" value="Delete" class="btn btn-default" /> |*@
+            @MyBootstrap.Button("submit", "danger", string.Empty, "remove", " Sil")
+            @MyBootstrap.LinkButton(" " + @ViewBag.returnUrl, "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")
+            @*@Html.ActionLink("Back to List", "Index")*@
+        </div>
+        }
+    </div>
+    </div>

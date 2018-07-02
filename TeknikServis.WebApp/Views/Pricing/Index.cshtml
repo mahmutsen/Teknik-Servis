@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TeknikServis.Entities.Pricing>
+
+@{
+    ViewBag.Title = "Fiyatlandırmalar";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>Fiyatlandırmalar</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            <a href="/Pricing/Create" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>Yeni
+            </a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DefectType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedUserName)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefectType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedUserName)
+                </td>
+                <td>
+                    @MyBootstrap.LinkButton("/Pricing/Edit/" + @item.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                    @MyBootstrap.LinkButton("/Pricing/Details/" + @item.Id, "info", "xs", "Detay", "search", string.Empty)
+                    @MyBootstrap.LinkButton("/Pricing/Delete/" + @item.Id, "danger", "xs", "Sil", "trash", string.Empty)
+                </td>
+            </tr>
+            }
+
+        </table>
+</div>
+</div>

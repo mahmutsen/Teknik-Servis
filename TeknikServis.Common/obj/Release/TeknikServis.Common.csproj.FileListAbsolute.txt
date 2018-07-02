@@ -1,0 +1,5 @@
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Common\bin\Release\TeknikServis.Common.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Common\bin\Release\TeknikServis.Common.pdb
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Common\obj\Release\TeknikServis.Common.csproj.CoreCompileInputs.cache
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Common\obj\Release\TeknikServis.Common.dll
+C:\Users\MM\source\repos\TeknikServisSolution\TeknikServis.Common\obj\Release\TeknikServis.Common.pdb

@@ -1,0 +1,68 @@
+﻿@using TeknikServis.Entities.ViewModelObjects
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Personel Giriş Sayfası";
+}
+
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/login-register.css" rel="stylesheet" />
+<link href="~/Content/validation-summary.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row main">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">MMS Teknik Servis</h1>
+                    <hr />
+                </div>
+            </div>
+            <div class="main-login main-center">
+
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Servis</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+                            @Html.DropDownListFor(x => x.ServiceId, null, new { @class = "form-control" })
+                            @*@Html.TextBoxFor(model => model.ServiceId, new { @class = "form-control", placeholder = "Kayıtlı olduğunuz servis numarası" })*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">E-posta Adresiniz</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-posta Adresiniz" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="cols-sm-2 control-label">Şifreniz</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifreniz", type = "password" })
+                        </div>
+                    </div>
+                </div>
+
+                @Html.ValidationSummary(false)
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-danger btn-lg btn-block login-button">Giriş</button>
+
+                </div>
+            </div>
+            <hr />
+            <hr />
+        </div>
+    </div>
+}
+

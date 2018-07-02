@@ -1,0 +1,71 @@
+﻿@model TeknikServis.Entities.BankAccount
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div>
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Sil</h2>
+        <h3>Silmek istediğinize emin misiniz?</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-2">
+        <h4>Banka Hesapları</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Service.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Service.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccountName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Bank)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Bank)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccountNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccountNo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IBAN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IBAN)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @MyBootstrap.Button("submit", "danger", string.Empty, "remove", " Sil")
+            @MyBootstrap.LinkButton("/BankAccount/Index", "default", string.Empty, string.Empty, "arrow-left", " Geri Dön")
+        </div>
+        }
+    </div>
+</div>

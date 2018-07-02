@@ -1,0 +1,72 @@
+﻿@*@using TeknikServis.WebApp*@
+@model IEnumerable<TeknikServis.Entities.Category>
+
+@{
+    ViewBag.Title = "Kategoriler";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>Kategoriler</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            <a href="/Category/Create" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>Yeni
+            </a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedUserName)
+                </th>
+                
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedUserName)
+                    </td>
+                    <td>
+                        @MyBootstrap.LinkButton("/Category/Edit/" + @item.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                        @MyBootstrap.LinkButton("/Category/Details/" + @item.Id, "info", "xs", "Detay", "search", string.Empty)
+                        @MyBootstrap.LinkButton("/Category/Delete/" + @item.Id, "danger", "xs", "Sil", "trash", string.Empty)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+

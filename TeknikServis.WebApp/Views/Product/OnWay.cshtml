@@ -1,0 +1,171 @@
+﻿@model IEnumerable<TeknikServis.Entities.Product>
+
+<link href="~/Content/filtertb.css" rel="stylesheet" />
+<script src="~/Scripts/table-filter.js"></script>
+@{
+    ViewBag.Title = "Deneme";
+}
+
+
+
+<div class="container">
+
+    <div class="row">
+        <!--Kategoriler-->
+        <div class="col-md-2">
+            @Html.Partial("_PartialProducts")
+        </div>
+
+        <div class="col-md-10">
+            @{
+                var gelen = Model.Where(x => x.AtService == false && x.Cargo == null).OrderByDescending(x => x.ModifiedOn);
+                var giden = Model.Where(x => x.Cargo != null).OrderByDescending(x => x.Cargo.ModifiedOn);
+            }
+
+            <div class="container">
+                <div class="row">
+                    <section class="content">
+                        @*<h1>Cihazlar</h1>*@
+                        <div class="col-md-8">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="pull-left">
+                                        @using (Html.BeginForm())
+                                        {
+                                            <div class="btn-group">
+                                                <b>Imei:</b> @Html.TextBox("SearchString")
+                                                <input type="submit" class="bg-primary" value="Filtrele" />
+                                            </div>
+
+                                        }
+                                    </div>
+                                    <div class="pull-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success btn-filter" data-target="pagado">gelen</button>
+                                            <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">giden</button>
+
+                                        </div>
+                                    </div>
+                                    <div class="table-container">
+                                        <table class="table table-filter">
+                                            <tbody>
+
+                                                @foreach (var item in gelen)
+                                                {
+                                                    <tr data-status="pagado">
+                                                        <td>
+                                                            <div class="ckbox">
+                                                                @MyBootstrap.LinkButton("/Product/Edit/" + @item.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:;" class="star">
+                                                                <i class="glyphicon glyphicon-star"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="media">
+                                                                <a href="/Product/Details/@item.Id" class="pull-left">
+                                                                    <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="media-photo">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right"></span>
+                                                                    <h4 class="title">
+                                                                        <a href="/Product/Details/@item.Id" class="pull-left">
+                                                                            @item.Imei
+                                                                        </a>
+                                                                        <span class="pull-right pagado">(Gelen)</span><br />
+                                                                        <span class="pull-right pagado">@item.ModifiedOn-@item.ModifiedUserName</span><br />
+                                                                        <span class="pull-right pagado">
+                                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_report"
+                                                                                    data-product-id="@item.Id">
+                                                                                Raporlar
+                                                                            </button>
+                                                                        </span>
+
+                                                                    </h4>
+                                                                    <p class="summary">@item.Problems</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @foreach (var item in giden)
+                                                {
+                                                    <tr data-status="pendiente">
+                                                        <td>
+                                                            <div class="ckbox">
+                                                                @MyBootstrap.LinkButton("/Product/Edit/" + @item.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:;" class="star">
+                                                                <i class="glyphicon glyphicon-star"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="media">
+                                                                <a href="/Product/Details/@item.Id" class="pull-left">
+                                                                    <img src="https://image.freepik.com/free-icon/mobile-phone_318-70471.jpg" class="media-photo">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <span class="media-meta pull-right"></span>
+                                                                    <h4 class="title">
+                                                                        <a href="/Product/Details/@item.Id" class="pull-left">
+                                                                            @item.Imei
+                                                                        </a>
+                                                                        <span class="pull-right pendiente">(Giden)</span><br />
+                                                                        <span class="pull-right pendiente">@item.ModifiedOn-@item.ModifiedUserName</span><br />
+                                                                        <span class="pull-right pendiente">
+                                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_report"
+                                                                                    data-product-id="@item.Id">
+                                                                                Raporlar
+                                                                            </button>
+                                                                        </span>
+
+                                                                    </h4>
+                                                                    <p class="summary">@item.Problems</p>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="ckbox">
+                                                                @if (item.Cargo != null)
+                                                                {
+                                                                    @*@MyBootstrap.LinkButton("/Cargo/Edit/" + @item.Id, "warning", "xs", "Düzenle", "edit", " " + item.Cargo.ModifiedOn + " TL")*@
+                                                                    @MyBootstrap.LinkButton("/Cargo/Edit/" + @item.Id, "success", "xs", "Düzenle", "send", " " + item.Cargo.ModifiedOn + "")
+                                                                    @*@MyBootstrap.LinkButton("/Cargo/Deneme/", "warning", "xs", "Düzenle", "edit", "Kargo")*@
+                                                                    @*@Html.Partial("_PartialEdit", item.Id)*@
+                                                                }
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-footer">
+                                <p>
+                                    Page © - 2016 <br>
+                                    Powered By <a href="https://www.facebook.com/tavo.qiqe.lucero" target="_blank">TavoQiqe</a>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@MyBootstrap.ModalPopup(id: "modal_report", title: "Raporlar")
+
+<script src="~/Scripts/report.js"></script>
+

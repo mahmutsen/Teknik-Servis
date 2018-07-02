@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TeknikServis.Entities.Report>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>Raporlar</h2>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            <a href="/Report/Create" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>Yeni
+            </a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.Imei)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedUserName)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Imei)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedUserName)
+                </td>
+                <td>
+                    @MyBootstrap.LinkButton("/Report/Edit/" + @item.Id, "warning", "xs", "Düzenle", "edit", string.Empty)
+                    @MyBootstrap.LinkButton("/Report/Details/" + @item.Id, "info", "xs", "Detay", "search", string.Empty)
+                    @MyBootstrap.LinkButton("/Report/Delete/" + @item.Id, "danger", "xs", "Sil", "trash", string.Empty)
+                </td>
+            </tr>
+            }
+
+        </table>
+</div>
+</div>
