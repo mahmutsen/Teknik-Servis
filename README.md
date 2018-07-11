@@ -10,4 +10,4 @@ Son Kullanıcı( Arızalı cihaz kayıtı olan müşteri) cihaz takibini kayıt 
 
 Bu proje Asp.Net MVC mimarisi ile tasarlanmıştır. Entity Framework Kullanılmış ve veritabanı tarafında EF' nin Code First yapısı kullanılmıştır. Proje de SOLID prensipleri gözetilmiştir. Web harici arayüzlere uygulanabilirliği için ek katmanlar eklenmiş ve soyutlamalar yapılmıştır.
 
-sunum-afiş klasörü içerisinde iş akış şeması, yerelde çalışmış hali ve kullanılan teknolojilere ait resimler bulunmaktadır.
+Sunum-Afiş klasörü içerisinde iş akış şeması, yerelde çalışmış hali ve kullanılan teknolojilere ait resimler bulunmaktadır.
