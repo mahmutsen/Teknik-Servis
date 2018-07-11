@@ -9,3 +9,5 @@ Servis Personeli ve Yöneticisi cihazlar hakkında raporlar tutabilir; Personeli
 Son Kullanıcı( Arızalı cihaz kayıtı olan müşteri) cihaz takibini kayıt sonrası gönderilen form numarası  ya da cihaz İmei No ilegerçekleştirir. Cihaz için ücret talebinde bulunması durumunda bu sorgu sayfası üzerinden hizmet iptal talebinde bulunabilir.Kargo ve ücret bilgilerini bu sayfadan görüntüleyebileceği gibi sistem tarafından kayıtlı mail adresine de gönderim yapılır.
 
 Bu proje Asp.Net MVC mimarisi ile tasarlanmıştır. Entity Framework Kullanılmış ve veritabanı tarafında EF' nin Code First yapısı kullanılmıştır. Proje de SOLID prensipleri gözetilmiştir. Web harici arayüzlere uygulanabilirliği için ek katmanlar eklenmiş ve soyutlamalar yapılmıştır.
+
+sunum-afiş klasörü içerisinde iş akış şeması, yerelde çalışmış hali ve kullanılan teknolojilere ait resimler bulunmaktadır.
